@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galactic Signature | Mayan Dreamspell Oracle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Mayan Color Palette */
+            --red-seal: #C41E3A;
+            --red-seal-light: #E8425C;
+            --red-seal-dark: #8B1426;
+            --red-seal-bg: rgba(196, 30, 58, 0.08);
+
+            --white-seal: #F5F5F0;
+            --white-seal-accent: #C9C9BE;
+            --white-seal-dark: #8A8A7A;
+            --white-seal-bg: rgba(245, 245, 240, 0.15);
+
+            --blue-seal: #1E5AA8;
+            --blue-seal-light: #3B7DD8;
+            --blue-seal-dark: #0D3A6E;
+            --blue-seal-bg: rgba(30, 90, 168, 0.08);
+
+            --yellow-seal: #D4A017;
+            --yellow-seal-light: #F0C14B;
+            --yellow-seal-dark: #9B7610;
+            --yellow-seal-bg: rgba(212, 160, 23, 0.08);
+
+            --green-castle: #2E8B57;
+
+            /* Base Theme */
+            --bg-primary: #0A0A0F;
+            --bg-secondary: #12121A;
+            --bg-tertiary: #1A1A25;
+            --bg-card: rgba(26, 26, 37, 0.7);
+
+            --text-primary: #F0EDE6;
+            --text-secondary: #A8A5A0;
+            --text-muted: #6B6860;
+
+            --border-color: rgba(168, 165, 160, 0.15);
+            --border-glow: rgba(212, 160, 23, 0.3);
+
+            --gap-glow: #2E8B57;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Starfield Background */
+        .starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(196, 30, 58, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(30, 90, 168, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(212, 160, 23, 0.02) 0%, transparent 70%);
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.3), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.2), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.4), transparent),
+                radial-gradient(2px 2px at 160px 120px, rgba(255,255,255,0.3), transparent),
+                radial-gradient(1px 1px at 230px 80px, rgba(255,255,255,0.25), transparent),
+                radial-gradient(2px 2px at 300px 200px, rgba(255,255,255,0.35), transparent),
+                radial-gradient(1px 1px at 400px 150px, rgba(255,255,255,0.2), transparent);
+            background-repeat: repeat;
+            background-size: 500px 300px;
+            animation: twinkle 8s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Main Container */
+        .app-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .logo-glyph {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .logo-glyph::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--yellow-seal);
+            border-radius: 50%;
+            animation: pulse-ring 3s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+        }
+
+        .logo-inner {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, var(--yellow-seal) 0%, var(--yellow-seal-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow:
+                0 0 30px rgba(212, 160, 23, 0.4),
+                inset 0 0 20px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            font-weight: 500;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--yellow-seal-light), var(--yellow-seal), var(--text-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            letter-spacing: 0.1em;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .nav-tab {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 0.5rem;
+            color: var(--text-secondary);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .nav-tab:hover {
+            color: var(--text-primary);
+            border-color: var(--border-color);
+            background: var(--bg-tertiary);
+        }
+
+        .nav-tab.active {
+            color: var(--yellow-seal);
+            border-color: var(--yellow-seal);
+            background: rgba(212, 160, 23, 0.1);
+        }
+
+        /* Sections */
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Calculator Section */
+        .calculator-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .calculator-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .input-panel {
+            background: var(--bg-card);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .input-panel h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            letter-spacing: 0.1em;
+        }
+
+        .date-input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .date-input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .date-input-group input {
+            width: 100%;
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            color: var(--text-primary);
+            font-family: 'Space Mono', monospace;
+            font-size: 1.1rem;
+            transition: border-color 0.3s;
+        }
+
+        .date-input-group input:focus {
+            outline: none;
+            border-color: var(--yellow-seal);
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--yellow-seal-dark), var(--yellow-seal));
+            border: none;
+            border-radius: 0.75rem;
+            color: var(--bg-primary);
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 160, 23, 0.3);
+        }
+
+        .today-btn {
+            width: 100%;
+            padding: 0.75rem;
+            margin-top: 0.75rem;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            color: var(--text-secondary);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .today-btn:hover {
+            border-color: var(--text-secondary);
+            color: var(--text-primary);
+        }
+
+        /* Results Panel */
+        .results-panel {
+            background: var(--bg-card);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            min-height: 500px;
+        }
+
+        .no-result {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            min-height: 400px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .no-result-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Galactic Signature Result */
+        .signature-result {
+            display: none;
+        }
+
+        .signature-result.visible {
+            display: block;
+        }
+
+        .signature-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .kin-number {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            letter-spacing: 0.2em;
+            margin-bottom: 0.5rem;
+        }
+
+        .signature-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .signature-title.red { color: var(--red-seal-light); }
+        .signature-title.white { color: var(--white-seal); }
+        .signature-title.blue { color: var(--blue-seal-light); }
+        .signature-title.yellow { color: var(--yellow-seal-light); }
+
+        .signature-affirmation {
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Glyph Display */
+        .glyph-display {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .glyph-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .glyph-symbol {
+            width: 100px;
+            height: 100px;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .glyph-symbol:hover {
+            transform: scale(1.05);
+        }
+
+        .glyph-symbol.red {
+            background: linear-gradient(135deg, var(--red-seal-dark), var(--red-seal));
+            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.3);
+        }
+
+        .glyph-symbol.white {
+            background: linear-gradient(135deg, var(--white-seal-dark), var(--white-seal-accent));
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+        }
+
+        .glyph-symbol.blue {
+            background: linear-gradient(135deg, var(--blue-seal-dark), var(--blue-seal));
+            box-shadow: 0 10px 30px rgba(30, 90, 168, 0.3);
+        }
+
+        .glyph-symbol.yellow {
+            background: linear-gradient(135deg, var(--yellow-seal-dark), var(--yellow-seal));
+            box-shadow: 0 10px 30px rgba(212, 160, 23, 0.3);
+        }
+
+        .glyph-symbol.gap::after {
+            content: '';
+            position: absolute;
+            width: 110%;
+            height: 110%;
+            border: 2px solid var(--gap-glow);
+            border-radius: 1.2rem;
+            animation: gap-pulse 2s infinite;
+        }
+
+        @keyframes gap-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.05); }
+        }
+
+        .glyph-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .glyph-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        /* Oracle Display */
+        .oracle-container {
+            margin: 2.5rem 0;
+        }
+
+        .oracle-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .oracle-grid {
+            display: grid;
+            grid-template-areas:
+                ". guide ."
+                "analog destiny antipode"
+                ". occult .";
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        .oracle-position {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .oracle-position:hover {
+            border-color: var(--border-glow);
+            transform: translateY(-2px);
+        }
+
+        .oracle-position.guide { grid-area: guide; }
+        .oracle-position.analog { grid-area: analog; }
+        .oracle-position.destiny {
+            grid-area: destiny;
+            border-width: 2px;
+        }
+        .oracle-position.antipode { grid-area: antipode; }
+        .oracle-position.occult { grid-area: occult; }
+
+        .oracle-position.destiny.red { border-color: var(--red-seal); }
+        .oracle-position.destiny.white { border-color: var(--white-seal-accent); }
+        .oracle-position.destiny.blue { border-color: var(--blue-seal); }
+        .oracle-position.destiny.yellow { border-color: var(--yellow-seal); }
+
+        .oracle-mini-glyph {
+            width: 50px;
+            height: 50px;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .oracle-mini-glyph.red { background: var(--red-seal-bg); border: 1px solid var(--red-seal); }
+        .oracle-mini-glyph.white { background: var(--white-seal-bg); border: 1px solid var(--white-seal-accent); }
+        .oracle-mini-glyph.blue { background: var(--blue-seal-bg); border: 1px solid var(--blue-seal); }
+        .oracle-mini-glyph.yellow { background: var(--yellow-seal-bg); border: 1px solid var(--yellow-seal); }
+
+        .oracle-role {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.25rem;
+        }
+
+        .oracle-seal-name {
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        /* Info Sections */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: var(--bg-tertiary);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .info-card-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-card-value {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .info-card-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        /* Meanings Section */
+        .meanings-container {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .meanings-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .meaning-block {
+            margin-bottom: 1.5rem;
+        }
+
+        .meaning-block h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .meaning-block h4.red { color: var(--red-seal-light); }
+        .meaning-block h4.white { color: var(--white-seal); }
+        .meaning-block h4.blue { color: var(--blue-seal-light); }
+        .meaning-block h4.yellow { color: var(--yellow-seal-light); }
+
+        .meaning-block p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .keyword {
+            padding: 0.25rem 0.75rem;
+            background: var(--bg-tertiary);
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Tzolkin Matrix Section */
+        .tzolkin-container {
+            background: var(--bg-card);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            overflow-x: auto;
+        }
+
+        .tzolkin-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .tzolkin-header h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tzolkin-header p {
+            color: var(--text-secondary);
+        }
+
+        .tzolkin-matrix {
+            display: grid;
+            grid-template-columns: repeat(20, minmax(50px, 1fr));
+            gap: 3px;
+            min-width: 1000px;
+        }
+
+        .tzolkin-cell {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .tzolkin-cell:hover {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+
+        .tzolkin-cell.red { background: var(--red-seal); color: white; }
+        .tzolkin-cell.white { background: var(--white-seal); color: var(--bg-primary); }
+        .tzolkin-cell.blue { background: var(--blue-seal); color: white; }
+        .tzolkin-cell.yellow { background: var(--yellow-seal); color: var(--bg-primary); }
+
+        .tzolkin-cell.gap {
+            box-shadow: 0 0 8px var(--gap-glow), inset 0 0 5px rgba(0,0,0,0.3);
+        }
+
+        .tzolkin-cell.selected {
+            outline: 3px solid white;
+            outline-offset: 2px;
+        }
+
+        .seal-headers {
+            display: grid;
+            grid-template-columns: repeat(20, minmax(50px, 1fr));
+            gap: 3px;
+            min-width: 1000px;
+            margin-bottom: 0.5rem;
+        }
+
+        .seal-header {
+            text-align: center;
+            font-size: 1rem;
+            padding: 0.25rem;
+        }
+
+        .tone-labels {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Seals Reference Section */
+        .seals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .seal-card {
+            background: var(--bg-card);
+            border-radius: 1.25rem;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .seal-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--border-glow);
+        }
+
+        .seal-card.red { border-left: 4px solid var(--red-seal); }
+        .seal-card.white { border-left: 4px solid var(--white-seal-accent); }
+        .seal-card.blue { border-left: 4px solid var(--blue-seal); }
+        .seal-card.yellow { border-left: 4px solid var(--yellow-seal); }
+
+        .seal-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .seal-card-glyph {
+            width: 60px;
+            height: 60px;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+        }
+
+        .seal-card-glyph.red { background: var(--red-seal); }
+        .seal-card-glyph.white { background: var(--white-seal); color: var(--bg-primary); }
+        .seal-card-glyph.blue { background: var(--blue-seal); }
+        .seal-card-glyph.yellow { background: var(--yellow-seal); color: var(--bg-primary); }
+
+        .seal-card-info h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .seal-card-info h3.red { color: var(--red-seal-light); }
+        .seal-card-info h3.white { color: var(--white-seal); }
+        .seal-card-info h3.blue { color: var(--blue-seal-light); }
+        .seal-card-info h3.yellow { color: var(--yellow-seal-light); }
+
+        .seal-card-info .seal-number {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .seal-attributes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin: 1rem 0;
+            padding: 0.75rem;
+            background: var(--bg-tertiary);
+            border-radius: 0.5rem;
+        }
+
+        .seal-attr {
+            text-align: center;
+        }
+
+        .seal-attr-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .seal-attr-value {
+            font-size: 0.85rem;
+            color: var(--text-primary);
+        }
+
+        .seal-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Tones Reference Section */
+        .tones-container {
+            background: var(--bg-card);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .tones-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .tones-header h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .tone-card {
+            background: var(--bg-tertiary);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .tone-card:hover {
+            border-color: var(--yellow-seal);
+        }
+
+        .tone-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .tone-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--yellow-seal-dark), var(--yellow-seal));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--bg-primary);
+        }
+
+        .tone-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--yellow-seal-light);
+        }
+
+        .tone-keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .tone-keyword {
+            padding: 0.2rem 0.6rem;
+            background: rgba(212, 160, 23, 0.1);
+            border: 1px solid rgba(212, 160, 23, 0.3);
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            color: var(--yellow-seal-light);
+        }
+
+        .tone-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Today Section */
+        .today-container {
+            background: var(--bg-card);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .today-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .today-header h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .today-date {
+            font-family: 'Space Mono', monospace;
+            color: var(--text-secondary);
+        }
+
+        /* Wavespell Section */
+        .wavespell-container {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-tertiary);
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .wavespell-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .wavespell-days {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .wavespell-day {
+            width: 35px;
+            height: 35px;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .wavespell-day.red { background: var(--red-seal-bg); border: 1px solid var(--red-seal); color: var(--red-seal-light); }
+        .wavespell-day.white { background: var(--white-seal-bg); border: 1px solid var(--white-seal-accent); color: var(--white-seal); }
+        .wavespell-day.blue { background: var(--blue-seal-bg); border: 1px solid var(--blue-seal); color: var(--blue-seal-light); }
+        .wavespell-day.yellow { background: var(--yellow-seal-bg); border: 1px solid var(--yellow-seal); color: var(--yellow-seal-light); }
+
+        .wavespell-day.current {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px currentColor;
+        }
+
+        /* GAP Badge */
+        .gap-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(46, 139, 87, 0.15);
+            border: 1px solid var(--gap-glow);
+            border-radius: 2rem;
+            color: var(--gap-glow);
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        .gap-badge::before {
+            content: '◆';
+            animation: gap-blink 1.5s infinite;
+        }
+
+        @keyframes gap-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--yellow-seal);
+            text-decoration: none;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: fixed;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            max-width: 280px;
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .tooltip.visible {
+            opacity: 1;
+        }
+
+        .tooltip-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tooltip-content {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .app-container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                letter-spacing: 0.15em;
+            }
+
+            .nav-tabs {
+                padding: 0.75rem;
+            }
+
+            .nav-tab {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.7rem;
+            }
+
+            .oracle-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 0.5rem;
+            }
+
+            .oracle-mini-glyph {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .glyph-symbol {
+                width: 70px;
+                height: 70px;
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="starfield">
+        <div class="stars"></div>
+    </div>
+
+    <div class="app-container">
+        <header>
+            <div class="logo-glyph">
+                <div class="logo-inner">☀</div>
+            </div>
+            <h1>Galactic Signature</h1>
+            <p class="tagline">Decode Your Mayan Dreamspell Oracle</p>
+        </header>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-section="calculator">Calculator</button>
+            <button class="nav-tab" data-section="today">Today's Energy</button>
+            <button class="nav-tab" data-section="tzolkin">Tzolkin Matrix</button>
+            <button class="nav-tab" data-section="seals">20 Solar Seals</button>
+            <button class="nav-tab" data-section="tones">13 Tones</button>
+        </nav>
+
+        <!-- Calculator Section -->
+        <section id="calculator" class="section active">
+            <div class="calculator-container">
+                <div class="input-panel">
+                    <h2>Enter Your Birth Date</h2>
+                    <div class="date-input-group">
+                        <label for="birthdate">Date of Birth</label>
+                        <input type="date" id="birthdate" />
+                    </div>
+                    <button class="calculate-btn" onclick="decodeSignature()">Decode Signature</button>
+                    <button class="today-btn" onclick="calculateToday()">Use Today's Date</button>
+                </div>
+
+                <div class="results-panel">
+                    <div class="no-result" id="noResult">
+                        <div class="no-result-icon">🌀</div>
+                        <p>Enter a date to decode your Galactic Signature</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Discover your unique cosmic identity in the 260-day Tzolkin cycle</p>
+                    </div>
+
+                    <div class="signature-result" id="signatureResult">
+                        <!-- Results populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Today's Energy Section -->
+        <section id="today" class="section">
+            <div class="today-container" id="todayContainer">
+                <!-- Populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Tzolkin Matrix Section -->
+        <section id="tzolkin" class="section">
+            <div class="tzolkin-container">
+                <div class="tzolkin-header">
+                    <h2>The Harmonic Module</h2>
+                    <p>260 Kin of the Sacred Tzolkin Calendar</p>
+                </div>
+                <div class="seal-headers" id="sealHeaders">
+                    <!-- Populated by JavaScript -->
+                </div>
+                <div class="tzolkin-matrix" id="tzolkinMatrix">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 20 Seals Section -->
+        <section id="seals" class="section">
+            <div class="seals-grid" id="sealsGrid">
+                <!-- Populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- 13 Tones Section -->
+        <section id="tones" class="section">
+            <div class="tones-container">
+                <div class="tones-header">
+                    <h2>The 13 Galactic Tones</h2>
+                    <p>Cosmic frequencies that shape how your energy manifests</p>
+                </div>
+                <div class="tones-grid" id="tonesGrid">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Based on the Dreamspell Calendar by José Argüelles</p>
+            <p style="margin-top: 0.5rem;">In Lak'ech Ala K'in — I am another yourself</p>
+        </footer>
+    </div>
+
+    <div class="tooltip" id="tooltip">
+        <div class="tooltip-title"></div>
+        <div class="tooltip-content"></div>
+    </div>
+
+    <script src="dreamspell.js"></script>
+</body>
+</html>
