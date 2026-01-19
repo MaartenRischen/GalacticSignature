@@ -941,6 +941,96 @@
             color: var(--text-secondary);
         }
 
+        /* Date Navigator */
+        .date-navigator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+
+        .nav-arrow {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-arrow:hover {
+            background: var(--yellow-seal-bg);
+            border-color: var(--yellow-seal);
+            color: var(--yellow-seal);
+        }
+
+        #energyDatePicker {
+            padding: 0.6rem 1rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            color: var(--text-primary);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        #energyDatePicker:focus {
+            outline: none;
+            border-color: var(--yellow-seal);
+        }
+
+        .today-link {
+            background: none;
+            border: none;
+            color: var(--yellow-seal);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: opacity 0.2s;
+        }
+
+        .today-link:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        /* Simple Interpretation Box */
+        .simple-interpretation {
+            background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
+            border: 1px solid var(--yellow-seal);
+            border-left: 4px solid var(--yellow-seal);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .simple-interpretation h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--yellow-seal-light);
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+        }
+
+        .simple-interpretation p {
+            color: var(--text-primary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .simple-interpretation strong {
+            color: var(--yellow-seal-light);
+        }
+
         /* Wavespell Section */
         .wavespell-container {
             margin-top: 2rem;

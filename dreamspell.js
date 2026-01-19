@@ -882,9 +882,72 @@ window.calculateToday = function() {
 // TODAY'S ENERGY SECTION
 // ============================================
 
-function displayTodaysEnergy() {
-    const today = new Date();
-    const kin = calculateKin(today.getFullYear(), today.getMonth() + 1, today.getDate());
+// Current selected date for the energy viewer
+let currentEnergyDate = new Date();
+
+/**
+ * Generate a simple, practical interpretation of the day's energy
+ */
+function getSimpleInterpretation(seal, tone, oracle) {
+    // Seal-based practical advice
+    const sealAdvice = {
+        1: "Today favors nurturing yourself and others. Start something new, take care of your basic needs, and create a supportive environment.",
+        2: "Communication is key today. Speak your truth, listen deeply, and let inspiration flow through you. Write, talk, or meditate.",
+        3: "Trust your dreams and intuition today. This is a good day for visualization, journaling your dreams, and tapping into abundance consciousness.",
+        4: "Plant seeds of intention today. Be patient with growth, focus on your potential, and set clear targets for what you want to bloom.",
+        5: "Honor your body and instincts today. Move, exercise, and trust your gut feelings. Let go of what no longer serves your vitality.",
+        6: "Today is about letting go and building bridges. Release attachments, forgive, and help others through transitions. Embrace endings as new beginnings.",
+        7: "A day for hands-on work and healing. Accomplish tasks, use your skills, and focus on completing what you've started. Healing is available.",
+        8: "Beauty and harmony are your guides today. Create art, appreciate elegance, and bring more beauty into your environment and relationships.",
+        9: "Go with the flow today. Allow emotions to move through you, practice self-care, and trust the natural rhythm of things.",
+        10: "Love is the answer today. Open your heart, show loyalty to those you care about, and practice unconditional love starting with yourself.",
+        11: "Keep it light and playful today. Don't take things too seriously, find the humor in situations, and let your inner child lead.",
+        12: "Exercise your free will wisely today. Make conscious choices, use your wisdom, and take responsibility for influencing your reality.",
+        13: "Explore and expand today. Try something new, break out of routines, and stay awake to the possibilities around you.",
+        14: "Your magic is strong today. Trust your inner power, be receptive to enchantment, and step into timelessness through meditation or ritual.",
+        15: "See the big picture today. Rise above details, trust your vision, and look at situations from a higher perspective.",
+        16: "Be a spiritual warrior today. Face fears with courage, ask the hard questions, and pursue your goals with intelligence and fearlessness.",
+        17: "Stay grounded and present today. Notice synchronicities, connect with nature, and trust that you're being guided on your path.",
+        18: "Look honestly at yourself and situations today. Cut through illusions, practice discernment, and reflect on what's truly real.",
+        19: "Embrace change and transformation today. Let the storms clear what needs clearing, and trust in your ability to regenerate.",
+        20: "Shine your light fully today. Embrace your enlightened nature, share your warmth with others, and celebrate life itself."
+    };
+
+    // Tone-based timing advice
+    const toneAdvice = {
+        1: "This is a day to unify and attract. Set intentions and draw resources toward your purpose.",
+        2: "Notice polarities and challenges today. They're here to help you find balance and grow stronger.",
+        3: "Activate your connections today. Serve others and watch how that service energizes everyone.",
+        4: "Define and give form to your ideas today. Measure twice, cut once. Structure creates freedom.",
+        5: "Step into your power today. Command your space and let your radiance shine outward.",
+        6: "Organize and balance today. Create rhythm in your life and extend equality to all.",
+        7: "Attune to higher frequencies today. Channel inspiration and let yourself be a vessel for wisdom.",
+        8: "Live your values today. Model integrity and harmonize your inner and outer worlds.",
+        9: "Pulse your intentions into reality today. Your focused will has strong manifesting power.",
+        10: "Bring things to completion today. Perfect your work and celebrate what you've manifested.",
+        11: "Release and let go today. Dissolve what's no longer needed and embrace liberation.",
+        12: "Cooperate and dedicate today. Join with others for a shared purpose and universalize your gifts.",
+        13: "Transcend ordinary limits today. Endure through challenges and touch the cosmic perspective."
+    };
+
+    // Combine for a complete simple interpretation
+    const gapNote = oracle.isGAP ?
+        "✨ This is a Galactic Activation Portal day — energies are amplified and the veil between dimensions is thin. Great for meditation, manifestation, and spiritual breakthroughs." : "";
+
+    return `
+        <strong>What to focus on:</strong> ${sealAdvice[seal.number]}
+        <br><br>
+        <strong>How to approach it:</strong> ${toneAdvice[tone.number]}
+        ${gapNote ? `<br><br>${gapNote}` : ''}
+    `;
+}
+
+function displayTodaysEnergy(date = null) {
+    const selectedDate = date || currentEnergyDate;
+    currentEnergyDate = selectedDate;
+
+    const isToday = isSameDay(selectedDate, new Date());
+    const kin = calculateKin(selectedDate.getFullYear(), selectedDate.getMonth() + 1, selectedDate.getDate());
     const oracle = getOracle(kin);
     const wavespell = getWavespell(kin);
     const castle = getCastle(kin);
@@ -892,6 +955,7 @@ function displayTodaysEnergy() {
     const tone = oracle.tone;
 
     const fullSignature = `${seal.color.charAt(0).toUpperCase() + seal.color.slice(1)} ${tone.name} ${seal.name.split(' ')[1]}`;
+    const dateString = selectedDate.toISOString().split('T')[0];
 
     // Build wavespell days
     let wavespellDays = '';
@@ -903,13 +967,25 @@ function displayTodaysEnergy() {
         wavespellDays += `<div class="wavespell-day ${dayColor} ${isCurrentDay ? 'current' : ''}" title="Kin ${dayKin}">${i + 1}</div>`;
     }
 
+    // Get simple interpretation
+    const simpleInterpretation = getSimpleInterpretation(seal, tone, oracle);
+
     document.getElementById('todayContainer').innerHTML = `
         <div class="today-header">
-            <h2>Today's Galactic Energy</h2>
-            <div class="today-date">${today.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div>
+            <h2>${isToday ? "Today's" : "Daily"} Galactic Energy</h2>
+
+            <div class="date-navigator">
+                <button class="nav-arrow" onclick="navigateEnergy(-1)" title="Previous day">◀</button>
+                <input type="date" id="energyDatePicker" value="${dateString}" onchange="setEnergyDate(this.value)" />
+                <button class="nav-arrow" onclick="navigateEnergy(1)" title="Next day">▶</button>
+            </div>
+
+            <div class="today-date">${selectedDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}${isToday ? ' (Today)' : ''}</div>
+
+            ${!isToday ? '<button class="today-link" onclick="goToToday()">← Back to Today</button>' : ''}
         </div>
 
-        <div class="signature-header" style="margin-top: 2rem;">
+        <div class="signature-header" style="margin-top: 1.5rem;">
             <div class="kin-number">KIN ${kin} ${oracle.isGAP ? '• GALACTIC ACTIVATION PORTAL' : ''}</div>
             <h2 class="signature-title ${seal.color}">${fullSignature}</h2>
             <p class="signature-affirmation">"${tone.affirmation}"</p>
@@ -930,8 +1006,14 @@ function displayTodaysEnergy() {
 
         ${oracle.isGAP ? '<div style="text-align: center;"><span class="gap-badge">Galactic Activation Portal Day</span></div>' : ''}
 
+        <!-- Simple Interpretation Section -->
+        <div class="simple-interpretation">
+            <h3>In Simple Terms</h3>
+            <p>${simpleInterpretation}</p>
+        </div>
+
         <div class="oracle-container">
-            <div class="oracle-title">Today's Oracle</div>
+            <div class="oracle-title">The Oracle</div>
             <div class="oracle-grid">
                 <div class="oracle-position guide">
                     <div class="oracle-mini-glyph ${oracle.guide.color}">${oracle.guide.glyph}</div>
@@ -981,19 +1063,43 @@ function displayTodaysEnergy() {
         </div>
 
         <div class="wavespell-container">
-            <div class="wavespell-title">Current Wavespell: ${wavespell.seal.name} (Day ${wavespell.currentDay} of 13)</div>
+            <div class="wavespell-title">Wavespell: ${wavespell.seal.name} (Day ${wavespell.currentDay} of 13)</div>
             <div class="wavespell-days">
                 ${wavespellDays}
             </div>
         </div>
 
         <div class="meaning-block" style="margin-top: 2rem; text-align: left;">
-            <h4 class="${seal.color}">Today's Message</h4>
+            <h4 class="${seal.color}">Deeper Meaning</h4>
             <p>${seal.description}</p>
             <p style="margin-top: 1rem;">${tone.description}</p>
         </div>
     `;
 }
+
+// Helper function to check if two dates are the same day
+function isSameDay(date1, date2) {
+    return date1.getFullYear() === date2.getFullYear() &&
+           date1.getMonth() === date2.getMonth() &&
+           date1.getDate() === date2.getDate();
+}
+
+// Navigation functions for the energy viewer
+window.navigateEnergy = function(direction) {
+    const newDate = new Date(currentEnergyDate);
+    newDate.setDate(newDate.getDate() + direction);
+    displayTodaysEnergy(newDate);
+};
+
+window.setEnergyDate = function(dateString) {
+    const [year, month, day] = dateString.split('-').map(Number);
+    const newDate = new Date(year, month - 1, day);
+    displayTodaysEnergy(newDate);
+};
+
+window.goToToday = function() {
+    displayTodaysEnergy(new Date());
+};
 
 // ============================================
 // TZOLKIN MATRIX
