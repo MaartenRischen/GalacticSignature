@@ -964,8 +964,24 @@ function displayTodaysEnergy(date = null) {
     const selectedDate = date || currentEnergyDate;
     currentEnergyDate = selectedDate;
 
-    const isToday = isSameDay(selectedDate, new Date());
-    const kin = calculateKin(selectedDate.getFullYear(), selectedDate.getMonth() + 1, selectedDate.getDate());
+    const now = new Date();
+    const isToday = isSameDay(selectedDate, now);
+
+    // Apply 5:30 PM logic: after 5:30 PM, the Dreamspell day advances to the next day
+    let displayDate = new Date(selectedDate);
+    let isAfterSunset = false;
+
+    if (isToday) {
+        const currentHour = now.getHours() + now.getMinutes() / 60;
+        if (currentHour >= 17.5) {
+            // After 5:30 PM - show tomorrow's kin
+            displayDate = new Date(selectedDate);
+            displayDate.setDate(displayDate.getDate() + 1);
+            isAfterSunset = true;
+        }
+    }
+
+    const kin = calculateKin(displayDate.getFullYear(), displayDate.getMonth() + 1, displayDate.getDate());
     const oracle = getOracle(kin);
     const wavespell = getWavespell(kin);
     const castle = getCastle(kin);
@@ -988,6 +1004,10 @@ function displayTodaysEnergy(date = null) {
     // Get simple interpretation
     const simpleInterpretation = getSimpleInterpretation(seal, tone, oracle);
 
+    // Build sunset notice for after 5:30 PM
+    const sunsetNotice = isAfterSunset ?
+        `<div class="sunset-notice">☾ After sunset (5:30 PM) — showing tomorrow's galactic energy</div>` : '';
+
     document.getElementById('todayContainer').innerHTML = `
         <div class="today-header">
             <h2>${isToday ? "Today's" : "Daily"} Galactic Energy</h2>
@@ -999,6 +1019,7 @@ function displayTodaysEnergy(date = null) {
             </div>
 
             <div class="today-date">${selectedDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}${isToday ? ' (Today)' : ''}</div>
+            ${sunsetNotice}
 
             ${!isToday ? '<button class="today-link" onclick="goToToday()">← Back to Today</button>' : ''}
         </div>
