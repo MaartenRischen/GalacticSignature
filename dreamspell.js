@@ -558,11 +558,29 @@ const GAP_PATTERN = new Set([
 /**
  * Calculate the Dreamspell Kin for a given Gregorian date
  * Reference: July 26, 1987 = Kin 34 (White Galactic Wizard)
+ *
+ * NOTE: The Dreamspell day changes at approximately 5:30 PM (sunset).
+ * For birth times before 5:30 PM, the previous day's kin applies.
+ * Pass hour parameter (0-24) only when calculating birth kin with known birth time.
  */
-function calculateKin(year, month, day) {
+function calculateKin(year, month, day, hour = null) {
+    // Time adjustment only applies when a specific hour is provided
+    // If time is before 5:30 PM (17:30), use the previous Gregorian day
+    let adjustedDay = day;
+    let adjustedMonth = month;
+    let adjustedYear = year;
+
+    if (hour !== null && hour < 17.5) {
+        // Use previous day for births before 5:30 PM
+        const prevDate = new Date(year, month - 1, day - 1);
+        adjustedYear = prevDate.getFullYear();
+        adjustedMonth = prevDate.getMonth() + 1;
+        adjustedDay = prevDate.getDate();
+    }
+
     // Reference date: July 26, 1987 = Kin 34
     const refDate = new Date(1987, 6, 26); // Month is 0-indexed
-    const inputDate = new Date(year, month - 1, day);
+    const inputDate = new Date(adjustedYear, adjustedMonth - 1, adjustedDay);
 
     // Calculate days between dates
     let daysDiff = Math.floor((inputDate - refDate) / (1000 * 60 * 60 * 24));
@@ -1107,27 +1125,27 @@ window.goToToday = function() {
 
 function displayTzolkinMatrix() {
     const matrix = document.getElementById('tzolkinMatrix');
-    const headers = document.getElementById('sealHeaders');
+    const headers = document.getElementById('toneHeaders');
 
-    // Create seal headers
+    // Create tone headers (1-13)
     let headersHTML = '';
-    for (let i = 0; i < 20; i++) {
-        headersHTML += `<div class="seal-header" title="${SOLAR_SEALS[i].name}">${SOLAR_SEALS[i].glyph}</div>`;
+    for (let tone = 1; tone <= 13; tone++) {
+        headersHTML += `<div class="tone-header" title="Tone ${tone}: ${GALACTIC_TONES[tone - 1].name}">${tone}</div>`;
     }
     headers.innerHTML = headersHTML;
 
     // Create matrix cells
-    // The Tzolkin is a 13-row x 20-column matrix
-    // Kin flows DOWN columns: 1,2,3...13 (col 1), 14,15...26 (col 2), etc.
-    // For CSS grid (left-to-right), we render row by row:
-    // Row 1 (tone 1): kins 1, 14, 27, 40... (tone 1 of each seal)
-    // Row 2 (tone 2): kins 2, 15, 28, 41... (tone 2 of each seal)
+    // The Tzolkin is a 20-row (seals) x 13-column (tones) matrix
+    // Correct formula: Kin = seal + (tone - 1) * 20
+    // Row 1 (Dragon): 1, 21, 41, 61, 81, 101, 121, 141, 161, 181, 201, 221, 241
+    // Row 2 (Wind): 2, 22, 42, 62, 82, 102, 122, 142, 162, 182, 202, 222, 242
+    // etc.
     let matrixHTML = '';
-    for (let tone = 1; tone <= 13; tone++) {
-        for (let seal = 1; seal <= 20; seal++) {
-            // Kin number: each column (seal) has 13 kins
-            const kinNumber = (seal - 1) * 13 + tone;
-            const sealData = SOLAR_SEALS[seal - 1];
+    for (let seal = 1; seal <= 20; seal++) {
+        const sealData = SOLAR_SEALS[seal - 1];
+        for (let tone = 1; tone <= 13; tone++) {
+            // Correct Kin formula: seal + (tone - 1) * 20
+            const kinNumber = seal + (tone - 1) * 20;
             const isGapDay = isGAP(kinNumber);
             const toneData = GALACTIC_TONES[tone - 1];
 
