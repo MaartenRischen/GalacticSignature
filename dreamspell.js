@@ -543,12 +543,20 @@ const GAP_KINS = [
 
 // GAP Pattern - The 52 Galactic Activation Portals (Loom of Maya)
 // Forms a double helix/DNA pattern in the Tzolkin matrix
+// Pattern is symmetric: kin N pairs with kin (261-N)
 const GAP_PATTERN = new Set([
-    1, 20, 22, 39, 43, 50, 51, 58, 64, 69, 72, 77,
-    85, 88, 93, 96, 106, 107, 108, 109, 110, 111, 112, 113,
-    148, 149, 150, 151, 152, 153, 154, 155,
+    // First diagonal cross (descending)
+    1, 22, 43, 64, 85,
+    106, 107, 108, 109, 110, 111, 112, 113, // Center column kins 106-113
+    // Second diagonal cross (ascending)
+    20, 39, 58, 77, 96,
+    // Symmetric partners (261 - kin)
+    148, 149, 150, 151, 152, 153, 154, 155, // Center column kins 148-155
     165, 168, 173, 176, 184, 189, 192, 197,
-    203, 210, 211, 218, 222, 239, 241, 260
+    218, 222, 239, 241, 260,
+    // Additional portal days completing the pattern
+    50, 51, 69, 72, 88, 93,
+    203, 210, 211
 ]);
 
 // ============================================
@@ -1144,43 +1152,65 @@ window.goToToday = function() {
 // TZOLKIN MATRIX
 // ============================================
 
+// Mayan dot-bar notation for tones 1-13
+function getMayanToneNotation(tone) {
+    const notations = {
+        1: '•',
+        2: '••',
+        3: '•••',
+        4: '••••',
+        5: '—',
+        6: '•<br>—',
+        7: '••<br>—',
+        8: '•••<br>—',
+        9: '••••<br>—',
+        10: '—<br>—',
+        11: '•<br>—<br>—',
+        12: '••<br>—<br>—',
+        13: '•••<br>—<br>—'
+    };
+    return notations[tone] || tone;
+}
+
 function displayTzolkinMatrix() {
-    const matrix = document.getElementById('tzolkinMatrix');
-    const headers = document.getElementById('toneHeaders');
+    const container = document.getElementById('tzolkinMatrixContainer');
 
-    // Create tone headers (1-13)
-    let headersHTML = '';
+    // Build the complete matrix HTML with seal labels
+    let html = '<div class="tzolkin-grid">';
+
+    // Header row: empty cell + 13 tone columns
+    html += '<div class="tzolkin-header-cell"></div>';
     for (let tone = 1; tone <= 13; tone++) {
-        headersHTML += `<div class="tone-header" title="Tone ${tone}: ${GALACTIC_TONES[tone - 1].name}">${tone}</div>`;
+        html += `<div class="tzolkin-tone-header" title="Tone ${tone}: ${GALACTIC_TONES[tone - 1].name}">${tone}</div>`;
     }
-    headers.innerHTML = headersHTML;
 
-    // Create matrix cells
-    // The Tzolkin is a 20-row (seals) x 13-column (tones) matrix
-    // Correct formula: Kin = seal + (tone - 1) * 20
-    // Row 1 (Dragon): 1, 21, 41, 61, 81, 101, 121, 141, 161, 181, 201, 221, 241
-    // Row 2 (Wind): 2, 22, 42, 62, 82, 102, 122, 142, 162, 182, 202, 222, 242
-    // etc.
-    let matrixHTML = '';
+    // 20 rows, one for each seal
     for (let seal = 1; seal <= 20; seal++) {
         const sealData = SOLAR_SEALS[seal - 1];
+
+        // Seal glyph label on the left
+        html += `<div class="tzolkin-seal-label ${sealData.color}" title="${sealData.name}">${sealData.glyph}</div>`;
+
+        // 13 cells for each tone
         for (let tone = 1; tone <= 13; tone++) {
-            // Correct Kin formula: seal + (tone - 1) * 20
             const kinNumber = seal + (tone - 1) * 20;
             const isGapDay = isGAP(kinNumber);
             const toneData = GALACTIC_TONES[tone - 1];
 
-            matrixHTML += `
+            html += `
                 <div class="tzolkin-cell ${sealData.color} ${isGapDay ? 'gap' : ''}"
                      data-kin="${kinNumber}"
                      title="Kin ${kinNumber}: ${toneData.name} ${sealData.name.split(' ')[1]}"
                      onclick="selectKinFromMatrix(${kinNumber})">
-                    ${kinNumber}
+                    <span class="cell-tone">${getMayanToneNotation(tone)}</span>
+                    <span class="cell-kin">${kinNumber}</span>
                 </div>
             `;
         }
     }
-    matrix.innerHTML = matrixHTML;
+
+    html += '</div>';
+    container.innerHTML = html;
 }
 
 window.selectKinFromMatrix = function(kin) {

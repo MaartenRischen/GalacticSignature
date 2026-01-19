@@ -682,70 +682,98 @@
             color: var(--text-secondary);
         }
 
-        .tzolkin-matrix {
-            display: grid;
-            grid-template-columns: repeat(13, minmax(50px, 1fr));
-            gap: 3px;
-            min-width: 700px;
+        .tzolkin-scroll-wrapper {
+            overflow-x: auto;
+            padding-bottom: 1rem;
         }
 
-        .tzolkin-cell {
-            aspect-ratio: 1;
+        .tzolkin-grid {
+            display: grid;
+            grid-template-columns: 50px repeat(13, minmax(55px, 70px));
+            gap: 2px;
+            min-width: 800px;
+        }
+
+        .tzolkin-header-cell {
+            background: transparent;
+        }
+
+        .tzolkin-tone-header {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.5rem 0;
+            color: var(--text-primary);
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+        }
+
+        .tzolkin-seal-label {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.65rem;
+            font-size: 1.5rem;
+            padding: 0.25rem;
+            border-radius: 6px;
+        }
+
+        .tzolkin-seal-label.red { background: var(--red-seal); }
+        .tzolkin-seal-label.white { background: var(--white-seal); }
+        .tzolkin-seal-label.blue { background: var(--blue-seal); }
+        .tzolkin-seal-label.yellow { background: var(--yellow-seal); }
+
+        .tzolkin-cell {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 2px;
             border-radius: 4px;
             cursor: pointer;
             transition: all 0.2s ease;
             position: relative;
+            min-height: 55px;
+            border: 1px solid rgba(0,0,0,0.1);
         }
 
         .tzolkin-cell:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
             z-index: 10;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
-        .tzolkin-cell.red { background: var(--red-seal); color: white; }
-        .tzolkin-cell.white { background: var(--white-seal); color: var(--bg-primary); }
-        .tzolkin-cell.blue { background: var(--blue-seal); color: white; }
-        .tzolkin-cell.yellow { background: var(--yellow-seal); color: var(--bg-primary); }
+        .tzolkin-cell.red { background: #E8A0A0; color: #333; }
+        .tzolkin-cell.white { background: #F5F5F0; color: #333; }
+        .tzolkin-cell.blue { background: #A0C8E8; color: #333; }
+        .tzolkin-cell.yellow { background: #F0E068; color: #333; }
 
         .tzolkin-cell.gap {
-            box-shadow: 0 0 8px var(--gap-glow), inset 0 0 5px rgba(0,0,0,0.3);
+            background: #90EE90 !important;
+            box-shadow: inset 0 0 0 2px rgba(0,100,0,0.3);
+        }
+
+        .tzolkin-cell.gap.red,
+        .tzolkin-cell.gap.yellow {
+            background: linear-gradient(135deg, #90EE90 50%, #FFB6C1 50%) !important;
         }
 
         .tzolkin-cell.selected {
-            outline: 3px solid white;
+            outline: 3px solid var(--yellow-seal);
             outline-offset: 2px;
         }
 
-        .tone-headers {
-            display: grid;
-            grid-template-columns: repeat(13, minmax(50px, 1fr));
-            gap: 3px;
-            min-width: 700px;
-            margin-bottom: 0.5rem;
+        .cell-tone {
+            font-size: 0.65rem;
+            line-height: 1;
+            margin-bottom: 2px;
+            font-weight: bold;
         }
 
-        .tone-header {
-            text-align: center;
-            font-size: 0.85rem;
-            padding: 0.25rem;
-            color: var(--text-secondary);
-        }
-
-        .tzolkin-row {
-            display: contents;
-        }
-
-        .seal-label {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            padding: 0.25rem;
+        .cell-kin {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
 
         .tone-labels {
@@ -1278,11 +1306,10 @@
                     <h2>The Harmonic Module</h2>
                     <p>260 Kin of the Sacred Tzolkin Calendar</p>
                 </div>
-                <div class="tone-headers" id="toneHeaders">
-                    <!-- Populated by JavaScript -->
-                </div>
-                <div class="tzolkin-matrix" id="tzolkinMatrix">
-                    <!-- Populated by JavaScript -->
+                <div class="tzolkin-scroll-wrapper">
+                    <div id="tzolkinMatrixContainer">
+                        <!-- Populated by JavaScript -->
+                    </div>
                 </div>
             </div>
         </section>
