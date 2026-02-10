@@ -1163,6 +1163,146 @@
             50% { opacity: 0.4; }
         }
 
+        /* Wavespell Updates Section */
+        .updates-container {
+            background: var(--bg-card);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .updates-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .updates-header h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .updates-header p {
+            color: var(--text-secondary);
+        }
+
+        .fb-feed-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
+        .fb-feed-wrapper iframe {
+            border-radius: 1rem;
+            max-width: 100%;
+        }
+
+        /* Private Readings Section */
+        .readings-container {
+            background: var(--bg-card);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .readings-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .readings-header h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .readings-header p {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .readings-content {
+            display: flex;
+            justify-content: center;
+        }
+
+        .readings-card {
+            max-width: 550px;
+            text-align: center;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
+            border: 1px solid var(--border-glow);
+            border-radius: 1.5rem;
+        }
+
+        .readings-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .readings-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--yellow-seal-light);
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+        }
+
+        .readings-card > p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .readings-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .readings-features li {
+            padding: 0.5rem 0;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .readings-features li::before {
+            content: '\2726  ';
+            color: var(--yellow-seal);
+        }
+
+        .readings-features li:last-child {
+            border-bottom: none;
+        }
+
+        .readings-cta {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #1877F2, #42A5F5);
+            color: white;
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .readings-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(24, 119, 242, 0.4);
+        }
+
+        .readings-note {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -1242,6 +1382,16 @@
                 height: 70px;
                 font-size: 2rem;
             }
+
+            .fb-feed-wrapper iframe {
+                width: 100%;
+                max-width: 340px;
+                height: 600px;
+            }
+
+            .readings-card {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -1263,6 +1413,8 @@
             <button class="nav-tab" data-section="tzolkin">Tzolkin Matrix</button>
             <button class="nav-tab" data-section="seals">20 Solar Seals</button>
             <button class="nav-tab" data-section="tones">13 Tones</button>
+            <button class="nav-tab" data-section="updates">Wavespell Updates</button>
+            <button class="nav-tab" data-section="readings">Private Readings</button>
         </nav>
 
         <!-- Calculator Section -->
@@ -1330,6 +1482,50 @@
                 </div>
                 <div class="tones-grid" id="tonesGrid">
                     <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Wavespell Updates Section (Facebook Feed) -->
+        <section id="updates" class="section">
+            <div class="updates-container">
+                <div class="updates-header">
+                    <h2>Wavespell Updates</h2>
+                    <p>Latest wave posts from Shay's Facebook page</p>
+                </div>
+                <div class="fb-feed-wrapper">
+                    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FMayandreamspell&tabs=timeline&width=500&height=800&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false"
+                        width="500" height="800" style="border:none;overflow:hidden" scrolling="no"
+                        frameborder="0" allowfullscreen="true"
+                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Private Readings Section -->
+        <section id="readings" class="section">
+            <div class="readings-container">
+                <div class="readings-header">
+                    <h2>Private Readings</h2>
+                    <p>Unlock the deeper layers of your Galactic Signature</p>
+                </div>
+                <div class="readings-content">
+                    <div class="readings-card">
+                        <div class="readings-icon">&#x2728;</div>
+                        <h3>Personal Mayan Reading</h3>
+                        <p>Discover the deeper meaning behind your Galactic Signature with a personalized reading by Shay. Explore your oracle, wavespell, and life path through the lens of the Dreamspell calendar.</p>
+                        <ul class="readings-features">
+                            <li>Your complete Galactic Signature breakdown</li>
+                            <li>Oracle relationships and their meaning in your life</li>
+                            <li>Your Wavespell purpose and current cycle guidance</li>
+                            <li>Personalized insights and recommendations</li>
+                        </ul>
+                        <a href="https://m.me/Mayandreamspell" target="_blank" rel="noopener noreferrer" class="readings-cta">
+                            Message Shay on Facebook
+                        </a>
+                        <p class="readings-note">Send a message to book your private reading</p>
+                    </div>
                 </div>
             </div>
         </section>
