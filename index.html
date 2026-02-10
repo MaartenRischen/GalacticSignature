@@ -1186,14 +1186,96 @@
             color: var(--text-secondary);
         }
 
-        .fb-feed-wrapper {
+        .posts-feed {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
-        .fb-feed-wrapper iframe {
+        .post-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
             border-radius: 1rem;
-            max-width: 100%;
+            overflow: hidden;
+            transition: border-color 0.3s ease;
+        }
+
+        .post-card:hover {
+            border-color: var(--border-glow);
+        }
+
+        .post-card-body {
+            padding: 1.5rem;
+        }
+
+        .post-date {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .post-message {
+            color: var(--text-primary);
+            font-size: 1rem;
+            line-height: 1.8;
+            white-space: pre-line;
+        }
+
+        .post-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .post-footer {
+            padding: 0.75rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .post-fb-link {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .post-fb-link:hover {
+            color: var(--yellow-seal);
+        }
+
+        .posts-loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+
+        .posts-follow-cta {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .posts-follow-cta a {
+            color: var(--yellow-seal);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            padding: 0.75rem 2rem;
+            border: 1px solid var(--yellow-seal);
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .posts-follow-cta a:hover {
+            background: rgba(212, 160, 23, 0.1);
         }
 
         /* Private Readings Section */
@@ -1383,12 +1465,6 @@
                 font-size: 2rem;
             }
 
-            .fb-feed-wrapper iframe {
-                width: 100%;
-                max-width: 340px;
-                height: 600px;
-            }
-
             .readings-card {
                 padding: 1.5rem;
             }
@@ -1486,19 +1562,18 @@
             </div>
         </section>
 
-        <!-- Wavespell Updates Section (Facebook Feed) -->
+        <!-- Wavespell Updates Section -->
         <section id="updates" class="section">
             <div class="updates-container">
                 <div class="updates-header">
                     <h2>Wavespell Updates</h2>
                     <p>Latest wave posts from Shay's Facebook page</p>
                 </div>
-                <div class="fb-feed-wrapper">
-                    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FMayandreamspell&tabs=timeline&width=500&height=800&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false"
-                        width="500" height="800" style="border:none;overflow:hidden" scrolling="no"
-                        frameborder="0" allowfullscreen="true"
-                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-                    </iframe>
+                <div class="posts-feed" id="postsFeed">
+                    <div class="posts-loading">Loading posts...</div>
+                </div>
+                <div class="posts-follow-cta">
+                    <a href="https://www.facebook.com/Mayandreamspell" target="_blank" rel="noopener noreferrer">Follow on Facebook</a>
                 </div>
             </div>
         </section>

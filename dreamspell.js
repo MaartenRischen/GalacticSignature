@@ -1346,6 +1346,8 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
             displaySealsReference();
         } else if (sectionId === 'tones') {
             displayTonesReference();
+        } else if (sectionId === 'updates') {
+            loadFacebookPosts();
         }
     });
 });
@@ -1366,6 +1368,49 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// ============================================
+// FACEBOOK POSTS FEED
+// ============================================
+
+function loadFacebookPosts() {
+    const feed = document.getElementById('postsFeed');
+    if (!feed) return;
+
+    fetch('posts.json')
+        .then(res => {
+            if (!res.ok) throw new Error('No posts yet');
+            return res.json();
+        })
+        .then(posts => {
+            if (!posts.length) {
+                feed.innerHTML = '<div class="posts-loading">No posts available yet.</div>';
+                return;
+            }
+            feed.innerHTML = posts.map(post => {
+                const date = new Date(post.created_time);
+                const dateStr = date.toLocaleDateString('en-US', {
+                    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+                });
+                const imageHtml = post.full_picture
+                    ? `<img class="post-image" src="${post.full_picture}" alt="" loading="lazy">`
+                    : '';
+                const messageHtml = post.message
+                    ? `<div class="post-card-body"><div class="post-date">${dateStr}</div><div class="post-message">${escapeHtml(post.message)}</div></div>`
+                    : `<div class="post-card-body"><div class="post-date">${dateStr}</div></div>`;
+                return `<div class="post-card">${imageHtml}${messageHtml}<div class="post-footer"><a class="post-fb-link" href="${post.permalink_url}" target="_blank" rel="noopener noreferrer">View on Facebook &rarr;</a></div></div>`;
+            }).join('');
+        })
+        .catch(() => {
+            feed.innerHTML = '<div class="posts-loading">Posts coming soon. Follow Shay on <a href="https://www.facebook.com/Mayandreamspell" target="_blank" style="color: var(--yellow-seal);">Facebook</a> in the meantime.</div>';
+        });
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
 
 // Export for potential module use
 if (typeof module !== 'undefined' && module.exports) {
